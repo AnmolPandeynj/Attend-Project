@@ -1,0 +1,135 @@
+Title: Smart QR + Geofenced Attendance Management System
+
+Description:
+Build a web + mobile-friendly prototype for a QR-based attendance system with geofencing and analytics. The app must support faculty and students with different interfaces, integrate with Firebase (Firestore + Authentication), and enforce security through dynamic token-based QR codes.
+
+🎯 Core Requirements
+1. Frontend
+
+Technology: React (JavaScript) + TailwindCSS.
+
+Two Interfaces:
+
+Faculty Web Interface:
+
+Faculty can log in securely.
+
+Faculty can create a new session by selecting:
+
+Semester (1–8)
+
+Branch (3 options predefined)
+
+Subject (6 subjects per semester)
+
+On session start, the system generates a QR code that refreshes every 2 seconds (token-based).
+
+Faculty dashboard should display:
+
+Current active session with QR code (auto-refresh)
+
+Session analytics (number of scans, attendance %).
+
+Ability to manually mark attendance for a student.
+
+Student Mobile-Friendly Interface:
+
+Students log in via OTP (Firebase Auth, phone number OTP).
+
+Home screen has a “Scan QR” button.
+
+On scanning a QR code, attendance is marked in Firestore.
+
+Student dashboard shows:
+
+Attendance % per subject
+
+Overall attendance trend (charts)
+
+2. Backend & Database
+
+Backend: Firebase as Backend-as-a-Service (BaaS).
+
+Database: Firestore.
+
+QR Token System:
+
+Every 2 seconds, a new tokenized QR code is generated.
+
+All generated tokens map to the same session ID.
+
+On scan, attendance is logged with fields:
+
+student_id
+
+session_id
+
+timestamp
+
+geofencing_status (inside/outside campus).
+
+Faculty Overrides: Faculty can mark attendance manually from their dashboard.
+
+3. Geofencing Feature
+
+Geofencing is an optional security layer.
+
+Uses device GPS to check if the student is inside campus boundaries.
+
+Behavior:
+
+If inside campus → attendance = valid.
+
+If outside campus → attendance still recorded, but field geofencing = "outside".
+
+If GPS/location fails → system still records attendance, without blocking.
+
+Admin/Faculty should have a toggle to enable/disable geofencing.
+
+4. Dashboards & Analytics
+
+Faculty Dashboard:
+
+Real-time attendance count.
+
+Session summary (present vs absent).
+
+Analytics per subject (attendance trends, student %).
+
+Student Dashboard:
+
+Attendance % by subject.
+
+Trend line of attendance.
+
+Warnings for low attendance subjects.
+
+🛠 Technical Requirements
+
+Frontend: React + TailwindCSS.
+
+Mobile Support: Student UI should be mobile-responsive and look like a simple Android app.
+
+Backend/Database: Firebase Firestore + Firebase Authentication.
+
+Authentication:
+
+Faculty → Email/Password login.
+
+Students → OTP-based login (Firebase phone auth).
+
+QR Generation: Token-based, auto-refresh every 2 seconds.
+
+Geofencing: Optional toggle, remark-based attendance if outside campus.
+
+🎨 Prototype Expectations
+
+Show faculty view (session creation, QR generator, analytics).
+
+Show student view (OTP login, scan QR, attendance tracking).
+
+Show QR auto-refresh flow.
+
+Show geofencing toggle effect (inside/outside campus record).
+
+Use charts for analytics (pie chart for present/absent, line chart for trends).
